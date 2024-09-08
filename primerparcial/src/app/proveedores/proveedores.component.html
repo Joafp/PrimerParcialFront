@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>Administración de Proveedores</h1>
+  <div class="filter-section">
+    <label for="nombreFiltro">Filtrar por nombre:</label>
+    <input type="text" id="nombreFiltro" [(ngModel)]="nombreFiltro" (input)="filtrarPorNombre()">
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>ID Proveedor</th>
+        <th>Nombre</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let proveedor of filteredProveedores">
+        <td>{{ proveedor.idProveedor }}</td>
+        <td>{{ proveedor.nombre }}</td>
+        <td>
+          <button (click)="editarProveedor(proveedor.idProveedor)">Editar</button>
+          <button (click)="eliminarProveedor(proveedor.idProveedor)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="agregarProveedor()">Agregar Proveedor</button>
+</div>

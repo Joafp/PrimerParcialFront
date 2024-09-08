@@ -1,23 +1,94 @@
-<p>principal works!</p>
-<table>
-  <thead class="text-primary">
-  <tr>
-    <th>user id</th>
-    <th>id post</th>
-    <th>titulo</th>
-    <th>cuerpo</th>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendamiento de Atención a Proveedores</title>
+  <style>
+    .container {
+      text-align: center;
+      margin: 20px;
+    }
+    table {
+      margin: 20px auto;
+      border-collapse: collapse;
+      width: 80%; /* Puedes ajustar el ancho de la tabla */
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid black;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .filters {
+      margin-bottom: 20px;
+    }
+    .filters label {
+      margin-right: 10px;
+    }
+    .filters input[type="date"] {
+      padding: 5px;
+      margin-right: 10px;
+    }
+    .filters button {
+      padding: 5px 10px;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Agendamiento de Atención a Proveedores</h1>
+    <div class="filters">
+      <form id="filterForm">
+        <label for="dateFilter">Fecha:</label>
+        <input type="date" id="dateFilter" name="dateFilter">
 
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let e of postList">
-    <td>{{e.userId}}</td>
-    <td>{{e.id}}</td>
-    <td>{{e.title}}</td>
-    <td>{{e.body}}</td>
-  </tr>
+        <button type="button" onclick="filterTable()">Filtrar</button>
+        <button type="button" onclick="clearFilters()">Borrar Filtro</button>
+      </form>
+    </div>
+    <table>
+      <tr>
+        <th>Inicio Agendamiento</th>
+        <th>Fin Agendamiento</th>
+        <th>Proveedor</th>
+        <th>Estado</th>
+        <th>Jaula</th>
+        <th>Inicio Recepción</th>
+        <th>Fin Recepción</th>
+        <th>Acciones</th>
+        <th>Detalles</th>
+      </tr>
+      <tr>
+        <td>Texto 1</td>
+        <td>Texto 2</td>
+        <td>Texto 3</td>
+        <td>Texto 4</td>
+        <td>Texto 5</td>
+        <td>Texto 6</td>
+        <td>Texto 7</td>
+        <td>Texto 8</td>
+        <td>Texto 9</td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    function filterTable() {
+      const date = document.getElementById('dateFilter').value;
+      // Aquí puedes añadir la lógica para filtrar la tabla basada en la fecha seleccionada.
+      console.log('Filtrar tabla por la fecha:', date);
+    }
+
+    function clearFilters() {
+      document.getElementById('filterForm').reset();
+      // Aquí puedes añadir la lógica para borrar los filtros aplicados.
+      console.log('Borrar filtros');
+    }
+  </script>
+</body>
+</html>
 
 
-  </tbody>
-
-</table>

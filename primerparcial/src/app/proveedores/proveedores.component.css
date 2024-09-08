@@ -1,0 +1,28 @@
+.container {
+  text-align: center;
+  margin: 20px;
+}
+
+.filter-section {
+  margin-bottom: 20px;
+}
+
+table {
+  margin: 20px auto;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid black;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+button {
+  padding: 5px 10px;
+  margin: 5px;
+}

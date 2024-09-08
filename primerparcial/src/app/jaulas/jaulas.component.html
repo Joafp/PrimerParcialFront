@@ -1,0 +1,29 @@
+<div class="container">
+  <h1>Administración de Jaulas de Recepción</h1>
+  <div class="filter-section">
+    <label for="nombreFiltro">Filtrar por nombre:</label>
+    <input type="text" id="nombreFiltro" [(ngModel)]="nombreFiltro" (input)="filtrarPorNombre()">
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>ID Jaula</th>
+        <th>Nombre</th>
+        <th>En Uso</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let jaula of filteredJaulas">
+        <td>{{ jaula.idJaula }}</td>
+        <td>{{ jaula.nombre }}</td>
+        <td>{{ jaula.enUso }}</td>
+        <td>
+          <button (click)="editarJaula(jaula.idJaula)">Editar</button>
+          <button (click)="eliminarJaula(jaula.idJaula)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="agregarJaula()">Agregar Jaula</button>
+</div>

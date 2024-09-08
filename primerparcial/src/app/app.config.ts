@@ -5,8 +5,9 @@ import { routes } from './app.routes';
 import { HttpClientModule } from '@angular/common/http';
 import { PostapiService } from './service/postapi.service';
 import { CommonModule } from '@angular/common';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes)]
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideAnimationsAsync()]
 };
 
 @NgModule({

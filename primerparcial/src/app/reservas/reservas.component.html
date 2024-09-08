@@ -1,0 +1,68 @@
+<div class="container">
+  <h1>Reserva de Turnos de Recepción</h1>
+
+  <form>
+    <div class="form-group">
+      <label for="fecha">Fecha:</label>
+      <input type="date" id="fecha" [(ngModel)]="reservaCabecera.fecha" name="fecha">
+    </div>
+
+    <div class="form-group">
+      <label for="horaInicioAgendamiento">Hora Inicio Agendamiento:</label>
+      <select id="horaInicioAgendamiento" [(ngModel)]="reservaCabecera.horaInicioAgendamiento" name="horaInicioAgendamiento">
+        <option *ngFor="let hora of horas" [value]="hora">{{ hora }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="horaFinAgendamiento">Hora Fin Agendamiento:</label>
+      <select id="horaFinAgendamiento" [(ngModel)]="reservaCabecera.horaFinAgendamiento" name="horaFinAgendamiento">
+        <option *ngFor="let hora of horas" [value]="hora">{{ hora }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="idProveedor">Proveedor:</label>
+      <select id="idProveedor" [(ngModel)]="reservaCabecera.idProveedor" name="idProveedor">
+        <option *ngFor="let proveedor of proveedores" [value]="proveedor.idProveedor">{{ proveedor.nombre }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="idJaula">Jaula:</label>
+      <select id="idJaula" [(ngModel)]="reservaCabecera.idJaula" name="idJaula">
+        <option *ngFor="let jaula of jaulas" [value]="jaula.idJaula">{{ jaula.nombre }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="horaInicioRecepcion">Hora Inicio Recepción:</label>
+      <select id="horaInicioRecepcion" [(ngModel)]="reservaCabecera.horaInicioRecepcion" name="horaInicioRecepcion">
+        <option *ngFor="let hora of horas" [value]="hora">{{ hora }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="horaFinRecepcion">Hora Fin Recepción:</label>
+      <select id="horaFinRecepcion" [(ngModel)]="reservaCabecera.horaFinRecepcion" name="horaFinRecepcion">
+        <option *ngFor="let hora of horas" [value]="hora">{{ hora }}</option>
+      </select>
+    </div>
+
+    <h3>Detalles de la Reserva</h3>
+    <div *ngFor="let detalle of reservaDetalle.detalles; let i = index" class="form-group">
+      <label for="idProducto">Producto:</label>
+      <select [(ngModel)]="detalle.idProducto" name="idProducto">
+        <option *ngFor="let producto of productos" [value]="producto.idProducto">{{ producto.nombre }}</option>
+      </select>
+
+      <label for="cantidad">Cantidad:</label>
+      <input type="number" [(ngModel)]="detalle.cantidad" name="cantidad">
+
+      <button type="button" (click)="eliminarDetalle(i)">Eliminar Detalle</button>
+    </div>
+
+    <button type="button" (click)="agregarDetalle()">Agregar Detalle</button>
+    <button type="button" (click)="registrarReserva()">Registrar Reserva</button>
+  </form>
+</div>

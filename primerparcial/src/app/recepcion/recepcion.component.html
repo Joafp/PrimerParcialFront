@@ -1,0 +1,88 @@
+<div class="container">
+  <h1>Ejecución de Recepción de Productos</h1>
+
+  <div class="form-group">
+    <label for="fecha">Seleccionar Fecha:</label>
+    <input type="date" id="fecha" [(ngModel)]="selectedFecha" name="fecha">
+    <button (click)="filtrarTurnos()">Filtrar</button>
+    <button (click)="borrarFiltro()">Borrar Filtro</button>
+  </div>
+
+  <h2>Turnos de Recepción</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID Turno</th>
+        <th>Fecha</th>
+        <th>Hora Inicio Agendamiento</th>
+        <th>Proveedor</th>
+        <th>Jaula</th>
+        <th>Estado</th>
+        <th>Hora Inicio Recepción</th>
+        <th>Hora Fin Recepción</th>
+        <th>Acciones</th>
+        <th>Detalles</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let turno of turnos">
+        <td>{{ turno.idTurno }}</td>
+        <td>{{ turno.fecha }}</td>
+        <td>{{ turno.horaInicioAgendamiento }}</td>
+        <td>{{ getProveedorNombre(turno.idProveedor) }}</td>
+        <td>{{ getJaulaNombre(turno.idJaula) }}</td>
+        <td>{{ getEstadoTurno(turno) }}</td>
+        <td>{{ turno.horaInicioRecepcion }}</td>
+        <td>{{ turno.horaFinRecepcion }}</td>
+        <td>
+          <ng-container *ngIf="!turno.horaInicioRecepcion && !turno.horaFinRecepcion">
+            <button (click)="mostrarSelectorJaula(turno)">Iniciar Recepción</button>
+          </ng-container>
+          <ng-container *ngIf="turno.horaInicioRecepcion && !turno.horaFinRecepcion">
+            <button (click)="finalizarRecepcion(turno)">Finalizar Recepción</button>
+          </ng-container>
+          <ng-container *ngIf="turno.horaInicioRecepcion && turno.horaFinRecepcion">
+            <button disabled>Ninguna Acción</button>
+          </ng-container>
+        </td>
+        <td>
+          <button (click)="verDetalles(turno)">Ver Detalles</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Popup para seleccionar jaula -->
+  <div class="overlay" *ngIf="popupVisible">
+    <div class="popup">
+      <h3>Seleccionar Jaula</h3>
+      <div class="jaulas-list">
+        <div *ngFor="let jaula of jaulasDisponibles" class="jaula-item" (click)="seleccionarJaula(jaula)">
+          {{ jaula.nombre }}
+        </div>
+      </div>
+      <button (click)="confirmarSeleccion()">Confirmar</button>
+      <button (click)="cerrarPopup()">Cancelar</button>
+    </div>
+  </div>
+
+<!-- Popup para ver detalles -->
+<div *ngIf="popupDetallesVisible" class="popup-overlay">
+  <div class="popup-content">
+    <h2>Detalles del Turno</h2>
+    <p><strong>Proveedor:</strong> {{ getProveedorNombre(selectedTurno.idProveedor) }}</p>
+    <p><strong>Fecha:</strong> {{ selectedTurno.fecha }}</p>
+    <p><strong>Hora de Agendamiento:</strong> {{ selectedTurno.horaInicioAgendamiento }}</p>
+
+    <h3>Productos</h3>
+    <ul>
+      <li *ngFor="let producto of productosDetalles">
+        {{ producto.nombre }}: {{ producto.cantidad }} unidades
+      </li>
+    </ul>
+
+    <button (click)="cerrarPopupDetalles()">Cerrar</button>
+  </div>
+</div>
+</div>
+

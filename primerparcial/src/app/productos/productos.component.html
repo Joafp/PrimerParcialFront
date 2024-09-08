@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>Administración de Productos</h1>
+  <div class="filter-section">
+    <label for="nombreFiltro">Filtrar por nombre:</label>
+    <input type="text" id="nombreFiltro" [(ngModel)]="nombreFiltro" (input)="filtrarPorNombre()">
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>ID Producto</th>
+        <th>Nombre</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of filteredProductos">
+        <td>{{ producto.idProducto }}</td>
+        <td>{{ producto.nombre }}</td>
+        <td>
+          <button (click)="editarProducto(producto.idProducto)">Editar</button>
+          <button (click)="eliminarProducto(producto.idProducto)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="agregarProducto()">Agregar Producto</button>
+</div>
